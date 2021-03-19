@@ -11,7 +11,6 @@ import UIKit
 class MainViewController: UITableViewController {
     
     var mainPresenter:IMainPresenter!
-    var presenterOutput: PresenterOutput?
 
     override func viewDidLoad() {
         super.viewDidLoad()

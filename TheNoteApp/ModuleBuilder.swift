@@ -14,6 +14,7 @@ class ModuleBuilder {
         let store = StoreService()
         let presenter = MainScreenPresenter(view: view)
         view.mainPresenter = presenter
+        store.createNote(title: "iOS")
         return view
     }
 }

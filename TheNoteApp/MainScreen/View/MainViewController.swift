@@ -10,13 +10,14 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var items = [TheNoteListItem]()
+    var mainPresenter:IMainPresenter!
+    var presenterOutput: PresenterOutput?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupTable()
-        getItems()
+        mainPresenter.reloadData()
     }
     
     // MARK: - Navigation bar
@@ -46,12 +47,13 @@ class MainViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        let items = mainPresenter.loadAllNote()
         return items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainViewCell.reuseId, for: indexPath) as! MainViewCell
+        let items = mainPresenter.loadAllNote()
         let item = items[indexPath.row]
         cell.configureWith(title: item.title!)
         return cell
@@ -64,9 +66,10 @@ class MainViewController: UITableViewController {
     @available(iOS 11.0, *)
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
-            self.deleteNote(item: self.items[indexPath.row])
+            let items = self.mainPresenter.loadAllNote()
+            self.mainPresenter.deleteItem(item: items[indexPath.row])
             
-            if self.items.isEmpty {
+            if items.isEmpty {
                 tableView.isHidden = true
             } else {
                 tableView.isHidden = false
@@ -77,60 +80,16 @@ class MainViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let items = mainPresenter.loadAllNote()
         let item = items[indexPath.row]
         showEditAlert(currentItem: item)
     }
 }
 
-extension MainViewController {
+extension MainViewController: IMainView {
     func reloadData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
-        }
-    }
-    
-    func getItems() {
-        
-        do {
-            items = try context.fetch(TheNoteListItem.fetchRequest())
-            reloadData()
-        }catch {
-            print("error")
-        }
-    }
-}
-
-extension MainViewController {
-    func deleteNote(item: TheNoteListItem) {
-        context.delete(item)
-        
-        do {
-            try context.save()
-            getItems()
-        } catch {
-            
-        }
-    }
-    
-    func updateNote(item: TheNoteListItem, newTitle: String) {
-        item.title = newTitle
-        
-        do {
-            try context.save()
-            getItems()
-        } catch {
-            
-        }
-    }
-    
-    func createNote(title: String) {
-        let newNote = TheNoteListItem(context: context)
-        newNote.title = title
-        do {
-            try context.save()
-            getItems()
-        } catch {
-            
         }
     }
 }
@@ -141,7 +100,7 @@ extension MainViewController {
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Submit", style: .cancel, handler: { _ in
             guard let field = alertController.textFields?.first, let text = field.text, !text.isEmpty else { return }
-            self.createNote(title: text)
+            self.mainPresenter.createItem(item: text)
         }))
         present(alertController, animated: true)
     }
@@ -154,7 +113,7 @@ extension MainViewController {
         }))
         actionSheetController.addAction(UIAlertAction(title: "Удалить", style: .destructive, handler: { [weak self] _ in
             guard let self = self else { return }
-            self.deleteNote(item: currentItem)
+            self.mainPresenter.deleteItem(item: currentItem)
         }))
         
         present(actionSheetController, animated: true)
@@ -166,7 +125,7 @@ extension MainViewController {
         alertController.textFields?.first?.text = currentItem.title
         alertController.addAction(UIAlertAction(title: "Submit", style: .cancel, handler: { _ in
             guard let field = alertController.textFields?.first, let newTitle = field.text, !newTitle.isEmpty else { return }
-            self.updateNote(item: currentItem, newTitle: newTitle)
+            self.mainPresenter.updateItem(item: currentItem, newTitle: newTitle)
         }))
         present(alertController, animated: true)
     }

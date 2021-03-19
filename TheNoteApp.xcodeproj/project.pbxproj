@@ -19,6 +19,13 @@
 		E8868CA8260251B700598390 /* Utills.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CA7260251B700598390 /* Utills.swift */; };
 		E8868CB126025BAD00598390 /* TheNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CB026025BAD00598390 /* TheNote.swift */; };
 		E8868CB326025D0500598390 /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CB226025D0500598390 /* MainViewCell.swift */; };
+		E8868CB62604E1EF00598390 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CB52604E1EF00598390 /* StoreService.swift */; };
+		E8868CB82604E27600598390 /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CB72604E27600598390 /* MainScreenPresenter.swift */; };
+		E8868CBA2604E2B400598390 /* IMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CB92604E2B400598390 /* IMainView.swift */; };
+		E8868CBC2604E31200598390 /* IMainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CBB2604E31200598390 /* IMainPresenter.swift */; };
+		E8868CBE2604E47400598390 /* IMainStoreSecvice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CBD2604E47400598390 /* IMainStoreSecvice.swift */; };
+		E8868CC22604E7BC00598390 /* PresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CC12604E7BC00598390 /* PresenterOutput.swift */; };
+		E8868CC62605037000598390 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8868CC52605037000598390 /* ModuleBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +43,13 @@
 		E8868CA7260251B700598390 /* Utills.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utills.swift; sourceTree = "<group>"; };
 		E8868CB026025BAD00598390 /* TheNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheNote.swift; sourceTree = "<group>"; };
 		E8868CB226025D0500598390 /* MainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
+		E8868CB52604E1EF00598390 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
+		E8868CB72604E27600598390 /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
+		E8868CB92604E2B400598390 /* IMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMainView.swift; sourceTree = "<group>"; };
+		E8868CBB2604E31200598390 /* IMainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMainPresenter.swift; sourceTree = "<group>"; };
+		E8868CBD2604E47400598390 /* IMainStoreSecvice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMainStoreSecvice.swift; sourceTree = "<group>"; };
+		E8868CC12604E7BC00598390 /* PresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterOutput.swift; sourceTree = "<group>"; };
+		E8868CC52605037000598390 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +82,7 @@
 		E8868C8726024D7500598390 /* TheNoteApp */ = {
 			isa = PBXGroup;
 			children = (
+				E8868CB42604E1C700598390 /* Service */,
 				E8868CAF26025B9C00598390 /* Entity */,
 				E8868CA92602528800598390 /* MainScreen */,
 				E8868CA6260251A000598390 /* Utills */,
@@ -79,6 +94,7 @@
 				E8868C9626024D7700598390 /* LaunchScreen.storyboard */,
 				E8868C9926024D7700598390 /* Info.plist */,
 				E8868C9126024D7500598390 /* TheNoteApp.xcdatamodeld */,
+				E8868CC52605037000598390 /* ModuleBuilder.swift */,
 			);
 			path = TheNoteApp;
 			sourceTree = "<group>";
@@ -103,8 +119,8 @@
 		E8868CA92602528800598390 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				E8868C9F26024E1800598390 /* MainViewController.swift */,
-				E8868CB226025D0500598390 /* MainViewCell.swift */,
+				E8868CC02604E78600598390 /* View */,
+				E8868CBF2604E77500598390 /* Presenter */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -115,6 +131,35 @@
 				E8868CB026025BAD00598390 /* TheNote.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		E8868CB42604E1C700598390 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E8868CB52604E1EF00598390 /* StoreService.swift */,
+				E8868CBD2604E47400598390 /* IMainStoreSecvice.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		E8868CBF2604E77500598390 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				E8868CBB2604E31200598390 /* IMainPresenter.swift */,
+				E8868CB72604E27600598390 /* MainScreenPresenter.swift */,
+				E8868CC12604E7BC00598390 /* PresenterOutput.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		E8868CC02604E78600598390 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8868C9F26024E1800598390 /* MainViewController.swift */,
+				E8868CB226025D0500598390 /* MainViewCell.swift */,
+				E8868CB92604E2B400598390 /* IMainView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,13 +235,20 @@
 			files = (
 				E8868CA426024FBF00598390 /* TheNoteListItem+CoreDataProperties.swift in Sources */,
 				E8868CB326025D0500598390 /* MainViewCell.swift in Sources */,
+				E8868CB82604E27600598390 /* MainScreenPresenter.swift in Sources */,
 				E8868C8926024D7500598390 /* AppDelegate.swift in Sources */,
 				E8868CA326024FBF00598390 /* TheNoteListItem+CoreDataClass.swift in Sources */,
 				E8868CB126025BAD00598390 /* TheNote.swift in Sources */,
 				E8868CA8260251B700598390 /* Utills.swift in Sources */,
+				E8868CBA2604E2B400598390 /* IMainView.swift in Sources */,
 				E8868C8B26024D7500598390 /* SceneDelegate.swift in Sources */,
+				E8868CBE2604E47400598390 /* IMainStoreSecvice.swift in Sources */,
+				E8868CBC2604E31200598390 /* IMainPresenter.swift in Sources */,
+				E8868CC62605037000598390 /* ModuleBuilder.swift in Sources */,
+				E8868CC22604E7BC00598390 /* PresenterOutput.swift in Sources */,
 				E8868C9326024D7500598390 /* TheNoteApp.xcdatamodeld in Sources */,
 				E8868CA026024E1800598390 /* MainViewController.swift in Sources */,
+				E8868CB62604E1EF00598390 /* StoreService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
